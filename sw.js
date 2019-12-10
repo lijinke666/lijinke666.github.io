@@ -9,8 +9,8 @@
  */
 
 //缓存的key
-const cacheKey = 'v4'
-const cacheWhitelist = ['v2'];
+const cacheKey = 'v5'
+const cacheWhitelist = [];
 
 //需要缓存的列表
 // TODO: 写一个脚本批量生成
