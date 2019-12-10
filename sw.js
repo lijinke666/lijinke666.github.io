@@ -9,29 +9,45 @@
  */
 
 //缓存的key
-const cacheKey = 'v1'
+const cacheKey = 'v3'
 
 //需要缓存的列表
-const cacheList = ['/', '/css', '/js', '/fonts', '/images']
+const cacheList = [
+  '/',
+  '/js/jquery.js',
+  '/js/jquery.appear.js',
+  '/js/jquery-migrate-1.2.1.min.js',
+  '/images/favicon.png',
+  '/images/logo.png',
+  '/images/logo@2x.png',
+  '/images/my.jpeg',
+  '/fonts/fontawesome-webfont.eot',
+  '/fonts/fontawesome-webfont.svg',
+  '/fonts/fontawesome-webfont.ttf',
+  '/fonts/fontawesome-webfont.woff',
+  '/css/blog_basic.css',
+  '/css/font-awesome.min.css',
+  '/css/style.css',
+  '/css/style.scss',
+  '/2019/10/31/变化/'
+]
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches
       .open(cacheKey) //将缓存写入在这个key中
       .then((cache) => cache.addAll(cacheList))
-      .then(() => self.skipWaiting()) //停止等待 页面更新时  立即激活生效 service worker 脚本
+    // .then(() => self.skipWaiting()) //停止等待 页面更新时  立即激活生效 service worker 脚本
   )
 })
 
 //网页赚取资源 service worker 可以捕获到 fetch 事件
 self.addEventListener('fetch', (e) => {
-  console.log(e)
   e.respondWith(
     //有请求来 先去缓存里找之前请求过没
     caches.match(e.request).then((res) => {
-      console.log(res)
       if (res != null) return res //如果请求过 直接返回结果
-      return fetch(e.request.url) //否则 继续请求
+      return fetch(e.request) //否则 继续请求
     })
   )
 })
@@ -67,4 +83,21 @@ self.addEventListener('notificationclick', function(event) {
   let notification = event.notification
   notification.close()
   event.waitUntil(clients.openWindow(notification.data.url))
+})
+
+self.addEventListener('error', (event) => {
+  // 上报错误信息
+  // 常用的属性：
+  // event.message
+  // event.filename
+  // event.lineno
+  // event.colno
+  // event.error.stack
+  console.log('error:', event)
+})
+self.addEventListener('unhandledrejection', (event) => {
+  // 上报错误信息
+  // 常用的属性：
+  // event.reason
+  console.log('unhandledrejection', event)
 })
