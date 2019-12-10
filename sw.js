@@ -10,8 +10,10 @@
 
 //缓存的key
 const cacheKey = 'v3'
+const cacheWhitelist = ['v2'];
 
 //需要缓存的列表
+// TODO: 写一个脚本批量生成
 const cacheList = [
   '/',
   '/js/jquery.js',
@@ -29,7 +31,20 @@ const cacheList = [
   '/css/font-awesome.min.css',
   '/css/style.css',
   '/css/style.scss',
-  '/2019/10/31/变化/'
+  '/css/style.scss',
+  '/css/style.scss',
+  '/logos/logo_48.png',
+  '/logos/logo_96.png',
+  '/logos/logo_192.png',
+  '/logos/logo_512.png',
+  '/2019/10/31/变化/',
+  '/2019/10/22/使用-service-worker-获取http-请求资源状态码/',
+  '/2019/09/11/useEffect-不完全踩坑指北/',
+  '/2019/08/07/Nest-js-与-GraphQL-在项目中的实际应用/',
+  '/2019/06/11/一次啼笑皆非的-drop-console/',
+  '/2019/06/05/初始-React-Hooks/',
+  '/2019/05/22/有点东西的React+Node开源博客/',
+  '/2019/05/20/为解决问题去学习新技术/'
 ]
 
 self.addEventListener('install', (e) => {
@@ -57,9 +72,8 @@ self.addEventListener('activate', function(e) {
   e.waitUntil(
     Promise.all(
       caches.keys().then((cacheNames) => {
-        console.log(cacheNames)
         return cacheNames.map((name) => {
-          if (name !== cacheStorageKey) {
+          if (cacheWhitelist.indexOf(key) === -1) {
             return caches.delete(name)
           }
         })
