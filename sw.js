@@ -9,7 +9,7 @@
  */
 
 //缓存的key
-const cacheKey = 'v5'
+const cacheKey = 'v7'
 const cacheWhitelist = [];
 
 //需要缓存的列表
@@ -37,14 +37,9 @@ const cacheList = [
   '/logos/logo_96.png',
   '/logos/logo_192.png',
   '/logos/logo_512.png',
-  '/2019/10/31/变化/',
-  '/2019/10/22/使用-service-worker-获取http-请求资源状态码/',
-  '/2019/09/11/useEffect-不完全踩坑指北/',
-  '/2019/08/07/Nest-js-与-GraphQL-在项目中的实际应用/',
-  '/2019/06/11/一次啼笑皆非的-drop-console/',
-  '/2019/06/05/初始-React-Hooks/',
-  '/2019/05/22/有点东西的React+Node开源博客/',
-  '/2019/05/20/为解决问题去学习新技术/'
+  '/about/',
+  '/archives/',
+  '/links/'
 ]
 
 self.addEventListener('install', (e) => {
