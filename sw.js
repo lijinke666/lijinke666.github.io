@@ -9,7 +9,7 @@
  */
 
 //缓存的key
-const cacheKey = 'v8.1'
+const cacheKey = 'v8.1.1'
 const cacheWhitelist = [];
 
 //需要缓存的列表
@@ -30,8 +30,6 @@ const cacheList = [
   '/css/blog_basic.css',
   '/css/font-awesome.min.css',
   '/css/style.css',
-  '/css/style.scss',
-  '/css/style.scss',
   '/css/style.scss',
   '/logos/logo_48.png',
   '/logos/logo_96.png',
