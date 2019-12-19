@@ -9,7 +9,7 @@
  */
 
 //缓存的key
-const cacheKey = 'v8.1.1'
+const cacheKey = 'v8.1.2'
 const cacheWhitelist = [];
 
 //需要缓存的列表
@@ -66,7 +66,7 @@ self.addEventListener('activate', function(e) {
     Promise.all(
       caches.keys().then((cacheNames) => {
         return cacheNames.map((name) => {
-          if (cacheWhitelist.indexOf(key) === -1) {
+          if (cacheWhitelist.indexOf(name) === -1) {
             return caches.delete(name)
           }
         })
