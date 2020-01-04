@@ -9,7 +9,7 @@
  */
 
 //缓存的key
-const cacheKey = 'v8.2.4'
+const cacheKey = 'v8.3.0'
 const cacheWhitelist = [];
 
 //需要缓存的列表
