@@ -15,7 +15,7 @@
 </ul>
 <p>…</p>
 <p>是不是非常的熟悉且怀念，似乎还有一点马上打开编辑器写上几行代码的冲动</p>
-<h3 id="怎么办"><a href="#怎么办" class="headerlink" title="怎么办?"></a>怎么办?</h3><p>程序员有三宝, 复制粘贴头发少, 遇到类似的需求, 也许会打开以前的项目，复制粘贴代码过来, 修修补补搞定,<br>亦或是封装一些 <code>高阶组件</code> 来搞定需求, 还有没有其他的解决方案呢? 众所周知, <code>react hook</code> 解决了逻辑服用的问题, 似乎不错的样子,<br>那么就来尝试一下</p>
+<h3 id="怎么办"><a href="#怎么办" class="headerlink" title="怎么办?"></a>怎么办?</h3><p>程序员有三宝, 复制粘贴头发少, 遇到类似的需求, 也许会打开以前的项目，复制粘贴代码过来, 修修补补搞定,<br>亦或是封装一些 <code>高阶组件</code> 来搞定需求, 还有没有其他的解决方案呢? 众所周知, <code>react hook</code> 解决了逻辑复用的问题, 似乎不错的样子,<br>那么就来尝试一下</p>
 <h3 id="去除空格"><a href="#去除空格" class="headerlink" title="去除空格"></a>去除空格</h3><p>以 <code>去除空格</code> 这个常见的需求来说, 我们自定义一个 <code>useTrimInput</code> 的 hook`</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState, useCallback &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> useTrimInput = (fullTrim: boolean = <span class="literal">false</span>): <span class="function"><span class="params">UseTrimInputReturn</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState&lt;string&gt;(<span class="string">''</span>)</span><br><span class="line">  <span class="keyword">const</span> setTrimValue = useCallback(</span><br><span class="line">    (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; &#123;</span><br><span class="line">      setValue(e.target.value)</span><br><span class="line">    &#125;,</span><br><span class="line">    [setValue],</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> useTrimInput</span><br></pre></td></tr></table></figure>
 <p>首先定义一个 <code>value</code> state, 用来保存当前 <code>input</code> 的 值, 使其是一个受控组件, 再定义 <code>setTrimValue</code> 接受当前 <code>event</code> 的 <code>value</code> 值,<br>逻辑非常简单</p>
@@ -51,13 +51,13 @@
 <li>数据类型之间的互相转换, 提供一个类似 <code>mongoose</code> 的 <code>Schema</code> 机制, 预先声明好每一个字段的类型和默认值</li>
 <li>增加删除指定的字段</li>
 </ol>
-<p>第一点这个灵感其实来源于项目中一个很厉害同事的灵感, 这里借鉴了一下</p>
+<p>第1点的灵感其实来自项目中一个很厉害同事的灵感, 这里借鉴(抄袭)了一下 :)</p>
 <p>首先看实现效果</p>
 <blockquote>
 <p>页码同步<br><img src="https://cdn.lijinke.cn/2020-03-09%2021.35.06.gif" alt="https://cdn.lijinke.cn/2020-03-09%2021.35.06.gif"></p>
 </blockquote>
 <blockquote>
-<p>不能类型的参数自动转换<br><img src="https://cdn.lijinke.cn/2020-03-09%2021.35.53.gif" alt="https://cdn.lijinke.cn/2020-03-09%2021.35.53.gif"></p>
+<p>不同类型的参数自动转换<br><img src="https://cdn.lijinke.cn/2020-03-09%2021.35.53.gif" alt="https://cdn.lijinke.cn/2020-03-09%2021.35.53.gif"></p>
 </blockquote>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先定义支持的数据类型</p>
 <figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">enum</span> UseSearchParamsSchemaType &#123;</span><br><span class="line">  STRING = <span class="string">'STRING'</span>,</span><br><span class="line">  NUMBER = <span class="string">'NUMBER'</span>,</span><br><span class="line">  ARRAY = <span class="string">'ARRAY'</span>,</span><br><span class="line">  BOOLEAN = <span class="string">'BOOLEAN'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
