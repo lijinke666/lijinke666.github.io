@@ -97,7 +97,7 @@ function showWelcomePage() {
 }
 
 window.onload = () => {
-  Notification.requestPermission((status) => {
+  Notification.requestPermission(() => {
     if (isNewUser()) {
       showNotification()
       saveUser()
