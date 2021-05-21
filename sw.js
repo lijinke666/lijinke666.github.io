@@ -9,7 +9,7 @@
  */
 
 //缓存的key
-const cacheKey = 'v8.5.0'
+const cacheKey = 'v8.6.0';
 const cacheWhitelist = [];
 
 //需要缓存的列表
@@ -37,60 +37,60 @@ const cacheList = [
   '/logos/logo_512.png',
   '/about/',
   '/archives/',
-  '/links/'
-]
+  '/links/',
+];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches
       .open(cacheKey) //将缓存写入在这个key中
-      .then((cache) => cache.addAll(cacheList))
+      .then((cache) => cache.addAll(cacheList)),
     // .then(() => self.skipWaiting()) //停止等待 页面更新时  立即激活生效 service worker 脚本
-  )
-})
+  );
+});
 
 //网页赚取资源 service worker 可以捕获到 fetch 事件
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     //有请求来 先去缓存里找之前请求过没
     caches.match(e.request).then((res) => {
-      if (res != null) return res //如果请求过 直接返回结果
-      return fetch(e.request) //否则 继续请求
-    })
-  )
-})
+      if (res != null) return res; //如果请求过 直接返回结果
+      return fetch(e.request); //否则 继续请求
+    }),
+  );
+});
 
 //更新静态资源
-self.addEventListener('activate', function(e) {
+self.addEventListener('activate', function (e) {
   e.waitUntil(
     Promise.all(
       caches.keys().then((cacheNames) => {
         return cacheNames.map((name) => {
           if (cacheWhitelist.indexOf(name) === -1) {
-            return caches.delete(name)
+            return caches.delete(name);
           }
-        })
-      })
+        });
+      }),
     ).then(() => {
-      return self.clients.claim() //取得 页面控制权 页面会使用新更新的缓存
-    })
-  )
-})
+      return self.clients.claim(); //取得 页面控制权 页面会使用新更新的缓存
+    }),
+  );
+});
 
 //接收推送消息
-self.addEventListener('push', function(event) {
-  const notificationData = event.data.json()
-  const title = notificationData.title
+self.addEventListener('push', function (event) {
+  const notificationData = event.data.json();
+  const title = notificationData.title;
   // 弹消息框
-  event.waitUntil(self.registration.showNotification(title, notificationData))
-})
+  event.waitUntil(self.registration.showNotification(title, notificationData));
+});
 
 //推送消息点击
-self.addEventListener('notificationclick', function(event) {
-  let notification = event.notification
-  notification.close()
-  event.waitUntil(clients.openWindow(notification.data.url))
-})
+self.addEventListener('notificationclick', function (event) {
+  let notification = event.notification;
+  notification.close();
+  event.waitUntil(clients.openWindow(notification.data.url));
+});
 
 self.addEventListener('error', (event) => {
   // 上报错误信息
@@ -100,11 +100,11 @@ self.addEventListener('error', (event) => {
   // event.lineno
   // event.colno
   // event.error.stack
-  console.log('error:', event)
-})
+  console.log('error:', event);
+});
 self.addEventListener('unhandledrejection', (event) => {
   // 上报错误信息
   // 常用的属性：
   // event.reason
-  console.log('unhandledrejection', event)
-})
+  console.log('unhandledrejection', event);
+});

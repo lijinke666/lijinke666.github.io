@@ -1,28 +1,28 @@
-const USER_KEY = '__USER__'
-const WELCOME_DURATION = 10 * 1000
+const USER_KEY = '__USER__';
+const WELCOME_DURATION = 10 * 1000;
 
 function showNotification() {
   const n = new Notification('感谢访问李金珂的小屋', {
     image: '/images/my.jpeg',
     icon: '/images/my.jpeg',
     body: '要想学仙术, 哪能不吃苦',
-  })
+  });
 
   n.onshow = () => {
-    setTimeout(n.close.bind(n), 5000)
-  }
+    setTimeout(n.close.bind(n), 5000);
+  };
 
   n.onclose = () => {
-    console.log('Notification close')
-  }
+    console.log('Notification close');
+  };
 }
 
 function isNewUser() {
-  return !sessionStorage.getItem(USER_KEY)
+  return !sessionStorage.getItem(USER_KEY);
 }
 
 function saveUser() {
-  sessionStorage.setItem(USER_KEY, true)
+  sessionStorage.setItem(USER_KEY, true);
 }
 
 function showWelcomePage() {
@@ -84,27 +84,48 @@ function showWelcomePage() {
       ></path>
     </svg>
   </div>
-  `
+  `;
 
-  const node = document.createElement('div')
-  node.classList = 'loading'
-  node.innerHTML = HTML
-  document.body.appendChild(node)
+  const node = document.createElement('div');
+  node.classList = 'loading';
+  node.innerHTML = HTML;
+  document.body.appendChild(node);
 
   setTimeout(() => {
-    node.remove()
-  }, WELCOME_DURATION)
+    node.remove();
+  }, WELCOME_DURATION);
+}
+
+function switchDark() {
+  const time = document.querySelector('#time');
+  DarkReader?.auto({
+    brightness: 100,
+    contrast: 90,
+    sepia: 10,
+  });
+  time.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      DarkReader?.enable({
+        brightness: 100,
+        contrast: 90,
+        sepia: 10,
+      });
+    } else {
+      DarkReader?.disable();
+    }
+  });
 }
 
 window.onload = () => {
   Notification.requestPermission(() => {
     if (isNewUser()) {
-      showNotification()
-      saveUser()
+      showNotification();
+      saveUser();
     }
-  })
+  });
   if (isNewUser()) {
-    showWelcomePage()
-    saveUser()
+    showWelcomePage();
+    saveUser();
   }
-}
+  switchDark();
+};

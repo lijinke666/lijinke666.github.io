@@ -6,7 +6,8 @@ html {
 
 body {
   color: rgba(0, 0, 0, 0.5);
-  font-family: 'PingHei', 'PingFang SC', Helvetica Neue, 'Work Sans', 'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
+  font-family: 'PingHei', 'PingFang SC', Helvetica Neue, 'Work Sans',
+    'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
   font-size: 15px;
   width: 100%;
   margin: 0 auto 30px auto;
@@ -23,18 +24,20 @@ a {
   text-decoration: none;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
   opacity: 1;
-  -webkit-transition: all .15s linear;
-  -moz-transition: all .15s linear;
-  -o-transition: all .15s linear;
-  -ms-transition: all .15s linear;
-  transition: all .15s linear;
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  -o-transition: all 0.15s linear;
+  -ms-transition: all 0.15s linear;
+  transition: all 0.15s linear;
   color: #424242;
 }
 
-a:hover, a:active {
-  color: #4786D6;
+a:hover,
+a:active {
+  color: #4786d6;
 }
 
 /*basic styles ends*/
@@ -136,15 +139,15 @@ a:hover, a:active {
   padding-right: 20px;
 }
 .page-top .nav a {
-  color: #5A5A5A;
+  color: #5a5a5a;
 }
 .page-top .nav a:hover {
-  color: #4786D6;
+  color: #4786d6;
 }
 .page-top .nav a.current {
-  color: #5A5A5A;
+  color: #5a5a5a;
   padding-bottom: 22px;
-  border-bottom: 1px solid #5A5A5A;
+  border-bottom: 1px solid #5a5a5a;
 }
 .page-top .information {
   float: right;
@@ -225,11 +228,126 @@ a:hover, a:active {
   color: #565654;
 }
 .sidebar .social-links a:hover {
-  color: #4786D6;
+  color: #4786d6;
+}
+.sidebar .switch {
+  text-align: center;
+}
+
+.switch {
+  width: 100px;
+  margin: 0 auto;
+  transform: scale(0.4)
+}
+
+.social-links {
+  margin-bottom: 0;
+}
+
+#time {
+  display: none;
+}
+
+#time + label {
+  --i: 0;
+  --j: calc(1 - var(--i));
+  display: grid;
+  grid-gap: 0.5em 0.25em;
+  overflow: hidden;
+  padding: 0.5em;
+  height: 2.5em;
+  border-radius: 1.75em;
+  background: hsl(199, 98%, calc(var(--j) * 48%));
+  color: transparent;
+  user-select: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+#time:checked + label {
+  --i: 1;
+}
+#time + label:before,
+#time + label:after {
+  width: 2.5em;
+  height: 2.5em;
+  transition: inherit;
+  content: '';
+}
+#time + label:after {
+  grid-column: 2;
+  border-radius: 50%;
+  transform: translateY(calc(var(--i) * (-100% - 0.5em)));
+  background: radial-gradient(
+    circle at 19% 19%,
+    rgba(0, 0, 0, 0) 41%,
+    #ffffff 43%
+  );
+}
+
+#time + label:before {
+  transform-origin: 20% 20%;
+  transform: translate(calc(var(--i) * (100% + 0.25em)))
+    scale(calc(1 - var(--i) * 0.7));
+  background: yellow;
+  --poly: polygon(
+    44.13371% 12.96169%,
+    50% 0%,
+    55.86629% 12.96169%,
+    59.70571% 13.77778%,
+    63.4388% 14.99073%,
+    67.02464% 16.58726%,
+    79.38926% 9.54915%,
+    76.5165% 23.4835%,
+    79.14297% 26.40049%,
+    81.45015% 29.57604%,
+    83.41274% 32.97536%,
+    97.55283% 34.54915%,
+    87.03831% 44.13371%,
+    87.44861% 48.0374%,
+    87.44861% 51.9626%,
+    87.03831% 55.86629%,
+    97.55283% 65.45085%,
+    83.41274% 67.02464%,
+    81.45015% 70.42396%,
+    79.14297% 73.59951%,
+    76.5165% 76.5165%,
+    79.38926% 90.45085%,
+    67.02464% 83.41274%,
+    63.4388% 85.00927%,
+    59.70571% 86.22222%,
+    55.86629% 87.03831%,
+    50% 100%,
+    44.13371% 87.03831%,
+    40.29429% 86.22222%,
+    36.5612% 85.00927%,
+    32.97536% 83.41274%,
+    20.61074% 90.45085%,
+    23.4835% 76.5165%,
+    20.85703% 73.59951%,
+    18.54985% 70.42396%,
+    16.58726% 67.02464%,
+    2.44717% 65.45085%,
+    12.96169% 55.86629%,
+    12.55139% 51.9626%,
+    12.55139% 48.0374%,
+    12.96169% 44.13371%,
+    2.44717% 34.54915%,
+    16.58726% 32.97536%,
+    18.54985% 29.57604%,
+    20.85703% 26.40049%,
+    23.4835% 23.4835%,
+    20.61074% 9.54915%,
+    32.97536% 16.58726%,
+    36.5612% 14.99073%,
+    40.29429% 13.77778%
+  );
+  -webkit-clip-path: var(--poly);
+  clip-path: var(--poly);
 }
 
 .post {
-  background-color: #FFF;
+  background-color: #fff;
   margin: 30px;
 }
 .post .post-title h1 {
@@ -266,18 +384,18 @@ a:hover, a:active {
 .post .post-content a {
   text-decoration: none;
   letter-spacing: 1px;
-  color: #4786D6;
+  color: #4786d6;
 }
 .post .post-content a:hover {
-  color: #2F69B3;
+  color: #2f69b3;
 }
 .post .post-content h3 {
-  color: #5F5F5F;
+  color: #5f5f5f;
   font-size: 22px;
   font-weight: 600;
 }
 .post .post-content h4 {
-  color: #5F5F5F;
+  color: #5f5f5f;
   font-size: 16px;
 }
 .post .post-footer {
@@ -302,7 +420,7 @@ a:hover, a:active {
   padding-right: 10px;
 }
 .post .post-footer .meta a:hover {
-  color: #4786D6;
+  color: #4786d6;
 }
 .post .post-footer .meta i {
   margin-right: 6px;
@@ -395,10 +513,10 @@ a:hover, a:active {
   background: #fff;
 }
 .footer a {
-  color: #A6A6A6;
+  color: #a6a6a6;
 }
 .footer a:hover {
-  color: #4786D6;
+  color: #4786d6;
 }
 
 /*for archive*/
@@ -429,13 +547,13 @@ a:hover, a:active {
 }
 .list-with-title .listing .listing-post .post-time {
   float: right;
-  color: #C5C5C5;
+  color: #c5c5c5;
 }
 .list-with-title .listing .listing-post a {
-  color: #8F8F8F;
+  color: #8f8f8f;
 }
 .list-with-title .listing .listing-post a:hover {
-  color: #4786D6;
+  color: #4786d6;
 }
 
 /* share */
@@ -448,7 +566,7 @@ a:hover, a:active {
   width: 32px;
   height: 32px;
   border-radius: 300px;
-  background-color: #3E3E3E;
+  background-color: #3e3e3e;
   margin-right: 5px;
 }
 .evernote a {
@@ -457,7 +575,7 @@ a:hover, a:active {
   font-size: 12px;
 }
 .evernote a:hover {
-  color: #ED6243;
+  color: #ed6243;
   padding: 11px;
 }
 
@@ -465,7 +583,7 @@ a:hover, a:active {
   width: 32px;
   height: 32px;
   border-radius: 300px;
-  background-color: #ED6243;
+  background-color: #ed6243;
   margin-right: 5px;
 }
 .weibo a {
@@ -473,14 +591,14 @@ a:hover, a:active {
   padding: 9px;
 }
 .weibo a:hover {
-  color: #BD4226;
+  color: #bd4226;
 }
 
 .twitter {
   width: 32px;
   height: 32px;
   border-radius: 300px;
-  background-color: #59C0FD;
+  background-color: #59c0fd;
   margin-right: 5px;
 }
 .twitter a {
@@ -488,7 +606,7 @@ a:hover, a:active {
   padding: 9px;
 }
 .twitter a:hover {
-  color: #4B9ECE;
+  color: #4b9ece;
 }
 
 /* about */
@@ -575,22 +693,22 @@ a.btn {
   border-radius: 999em;
 }
 
-[role="back"] {
+[role='back'] {
   padding: 0.5em 1.25em;
   line-height: 1.666em;
 }
 
-[role="home"] {
+[role='home'] {
   padding: 0.5em 1.25em;
   line-height: 1.666em;
 }
 
-[role="navigation"] {
+[role='navigation'] {
   padding: 0.5em 1.25em;
   line-height: 1.666em;
 }
 
-[role="tags"] {
+[role='tags'] {
   padding: 6px 12px;
 }
 
@@ -629,7 +747,7 @@ a.btn {
   padding: 0.5em 1.25em;
   outline: 0;
   color: #fff;
-  background: #3CBD10;
+  background: #3cbd10;
   font-size: 14px;
   text-align: center;
   text-decoration: none;
@@ -762,4 +880,5 @@ path {
   to {
     backdrop-filter: blur(20px);
   }
+}
 }
