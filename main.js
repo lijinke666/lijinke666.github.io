@@ -127,5 +127,4 @@ window.onload = () => {
     showWelcomePage();
     saveUser();
   }
-  switchDark();
 };
