@@ -9,13 +9,12 @@
  */
 
 //缓存的key
-const cacheKey = 'v8.6.2';
+const cacheKey = 'v8.6.3';
 const cacheWhitelist = [];
 
 //需要缓存的列表
 // TODO: 写一个脚本批量生成
 const cacheList = [
-  '/',
   '/js/jquery.js',
   '/js/jquery.appear.js',
   '/js/jquery-migrate-1.2.1.min.js',
