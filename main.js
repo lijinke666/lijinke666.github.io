@@ -1,5 +1,5 @@
 const USER_KEY = '__USER__';
-const WELCOME_DURATION = 10 * 1000;
+const WELCOME_DURATION = 5 * 1000;
 
 function showNotification() {
   const n = new Notification('感谢访问李金珂的小屋', {
