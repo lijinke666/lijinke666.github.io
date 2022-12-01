@@ -1,5 +1,5 @@
 const USER_KEY = '__USER__';
-const WELCOME_DURATION = 5 * 1000;
+const WELCOME_DURATION = 10 * 1000;
 
 function showNotification() {
   const n = new Notification('感谢访问李金珂的小屋', {
@@ -18,11 +18,11 @@ function showNotification() {
 }
 
 function isNewUser() {
-  return !sessionStorage.getItem(USER_KEY);
+  return !localStorage.getItem(USER_KEY);
 }
 
 function saveUser() {
-  sessionStorage.setItem(USER_KEY, true);
+  localStorage.setItem(USER_KEY, true);
 }
 
 function showWelcomePage() {
