@@ -22,12 +22,12 @@ function showShare() {
 }
 
 window.addEventListener('appinstalled', (evt) => {
-  console.log('PWA app 成功安装');
+  console.log('PWA App 成功安装');
   showShare();
   Notification.requestPermission((status) => {
     console.log('[Notification] requestPermission status: ', status);
     const n = new Notification('李金珂的小屋安装成功', {
-      icon: '/images/my.jpeg',
+      icon: '/logos/logo_96.png',
       body: '要想学仙术, 哪能不吃苦',
     });
 
